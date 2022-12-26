@@ -9,3 +9,8 @@
 /.psa*
 /.spago
 .idea
+dist
+.env
+.terraform
+aws-dist
+.DS_Store

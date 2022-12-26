@@ -1,0 +1,9 @@
+{
+  "name": "purescript-lambda",
+  "type": "module",
+  "description": "Purescript lambda function",
+  "version": "1.0",
+  "main": "index.js",
+  "author": "Amman Vedi",
+  "license": "ISC"
+}

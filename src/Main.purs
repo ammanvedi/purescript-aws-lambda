@@ -1,10 +1,8 @@
-module Main where
+module Main (handler) where
 
 import Prelude
 
-import Effect (Effect)
-import Effect.Console (log)
+import AWSLambdaEvent (LambdaEvent)
 
-main :: Effect Unit
-main = do
-  log "🍝"
+handler :: LambdaEvent -> String
+handler _ = "ABDD"
