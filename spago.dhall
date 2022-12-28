@@ -11,7 +11,22 @@ When creating a new Spago project, you can use
 to generate this file without the comments in this block.
 -}
 { name = "purescript-lambda"
-, dependencies = [ "console", "effect", "prelude" ]
+, dependencies =
+  [ "aff"
+  , "affjax"
+  , "affjax-node"
+  , "argonaut"
+  , "argonaut-core"
+  , "console"
+  , "effect"
+  , "either"
+  , "exceptions"
+  , "foreign-object"
+  , "http-methods"
+  , "maybe"
+  , "ordered-collections"
+  , "prelude"
+  ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
 }
