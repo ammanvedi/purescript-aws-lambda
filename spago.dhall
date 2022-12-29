@@ -13,19 +13,24 @@ to generate this file without the comments in this block.
 { name = "purescript-lambda"
 , dependencies =
   [ "aff"
+  , "aff-promise"
   , "affjax"
   , "affjax-node"
   , "argonaut"
+  , "argonaut-codecs"
   , "argonaut-core"
   , "console"
   , "effect"
   , "either"
   , "exceptions"
+  , "fetch"
+  , "fetch-argonaut"
   , "foreign-object"
   , "http-methods"
   , "maybe"
   , "ordered-collections"
   , "prelude"
+  , "transformers"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]
