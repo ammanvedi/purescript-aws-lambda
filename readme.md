@@ -1,6 +1,6 @@
 # Purescript Lambda
 
-Deploy a purescript function to AWS Lambda
+Deploy a Purescript function to AWS Lambda
 
 ## Getting Started
 
@@ -8,7 +8,7 @@ Deploy a purescript function to AWS Lambda
 Purescript is a functional programming language that compiles to Javascript
 
 ### [Install Spago](https://github.com/purescript/documentation/blob/master/guides/Getting-Started.md#setting-up-the-development-environment)
-Spago is a build tool and package manager for purescript
+Spago is a build tool and package manager for Purescript
 
 ### [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 Terraform is an infrastructure as code tool, we will use it to deploy our lambda function to AWS
@@ -40,13 +40,25 @@ There are two main sides to this codebase;
 ### Purescript
 
 #### `src/`
-The purescript code is located here. The entry point of the lambda is the handler function in Main.purs.
+The Purescript code is located here. The entry point of the lambda is the handler function in Main.purs.
+
+Our code as it stands will
+- Handle the incoming lambda invocation
+- Make an api call to the pokemon api
+- Decode this api response into an internal Purescript type
+- Encode this Purescript type to JSON
+- Stringify this JSON
+- return it to the user with a 200 status
+
+If anything goes wrong in this process then we will return a 500
+
+Yes this all seems a-lot of effort for what is essentially a proxy, but it will help to have examples of the encoding and decoding.
 
 #### `test/`
-Here live our purescript tests, implementation is left as an excercise for the reader.
+Here live our Purescript tests, implementation is left as an excercise for the reader.
 
 #### `scripts/`
-Scripts for the development lifeycle
+Scripts for the development lifecycle
 
 #### `infra/`
 Contains the Terraform code that is used to deploy the lambda function to AWS
