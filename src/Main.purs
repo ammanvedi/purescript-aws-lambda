@@ -20,13 +20,28 @@ import Control.Promise (fromAff, Promise)
 import Effect.Aff.Compat (mkEffectFn1)
 import Control.Monad.Error.Class (catchError)
 
+type JsonKey = String
+
+-- Definition and typeclass instances for the response from the Pokeomon API
+
+newtype PokemonResponse = PokemonResponse { id:: Number, name :: String }
+
+instance pokemonResponseDecode :: DecodeJson PokemonResponse where
+    decodeJson j = do
+        jsonObj <- case A.toObject j of
+                    Just o -> Right o
+                    Nothing -> Left (TypeMismatch "object could not be parsed to a object")
+        id <- jsonLookupNumber "id" jsonObj
+        name <- jsonLookupString "name" jsonObj
+        pure $ PokemonResponse { id: id, name: name}
+
+instance pokemonResponseEncode :: EncodeJson PokemonResponse where
+    encodeJson (PokemonResponse p) = encodeJson p
 
 failResponse :: Aff AWSAPIGatewayResponse
 failResponse = pure { statusCode: 500, headers: FO.empty, body: "Failed" }
 
-newtype PokemonResponse = PokemonResponse { id:: Number, name :: String }
 
-type JsonKey = String
 
 jsonLookup :: JsonKey -> FO.Object A.Json -> Either JsonDecodeError A.Json
 jsonLookup k o = case FO.lookup k o of
@@ -49,21 +64,9 @@ jsonLookupString k o = do
                 Nothing -> Left (TypeMismatch "value was not a string")
     pure parsed
 
-instance pokemonResponseDecode :: DecodeJson PokemonResponse where
-    decodeJson j = do
-        jsonObj <- case A.toObject j of
-                    Just o -> Right o
-                    Nothing -> Left (TypeMismatch "object could not be parsed to a object")
-        id <- jsonLookupNumber "id" jsonObj
-        name <- jsonLookupString "name" jsonObj
-        pure $ PokemonResponse { id: id, name: name}
-
-instance pokemonResponseEncode :: EncodeJson PokemonResponse where
-    encodeJson (PokemonResponse p) = encodeJson p
-
 run :: LambdaEvent -> Aff AWSAPIGatewayResponse
 run _ = do
-            response <- fetch "https://pokeapi.co/api/v2/pokemon/ditto"
+            response <- fetch "https://pokasddseapi.co/api/v2/pokemon/ditto"
                 {
                     method: GET,
                     headers: { "Content-Type": "application/json" }
