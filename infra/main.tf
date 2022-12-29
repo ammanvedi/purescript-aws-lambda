@@ -13,6 +13,7 @@ terraform {
   }
 
   backend "s3" {
+    # TODO: Change as needed
     bucket = "purescriptlambda"
     key    = "state"
   }
@@ -23,9 +24,14 @@ terraform {
 module "lambda" {
   source = "./lambda"
 
+  # TODO: Change as needed
   lambda_function_name = "purescript_lambda"
+  # TODO: Change as needed
   iam_policy_name = "purescript_lambda_policy"
+  # TODO: Change as needed
   iam_role_name = "purescript_lambda_role"
+
+  # Do not change
   source_path = "${path.root}/../dist"
   dist_path = "${path.root}/../aws-dist"
   aws_region = var.aws_region
