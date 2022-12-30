@@ -4,6 +4,12 @@ Deploy a Purescript function to AWS Lambda
 
 ## Getting Started
 
+### [Install Docker](https://docs.docker.com/desktop/install/mac-install/)
+Docker is needed for invoking the lambda locally with SAM Local. You can also use [lighter alternatives like Colima for this.](https://gist.github.com/thomashartm/9d48aa8d9fad98ee06c368bd416d1f08)
+
+### [Install Sam Local](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+Sam local can be used to invoke the lambda function in a realistic manner on your local machine
+
 ### [Install Purescript](https://github.com/purescript/documentation/blob/master/guides/Getting-Started.md#installing-the-compiler)
 Purescript is a functional programming language that compiles to Javascript
 
@@ -19,11 +25,14 @@ in `infra/main.tf` you should change elements marked with `# TODO: Change as nee
 ### Create Your Own `.env` File
 Create a `.env` file in the root of the project which matches the structure of the `.env.example` provided. See here for help getting [AWS secret keys](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html)
 
-### Initialise Terraform
-Run `./scripts/tf-init.sh` to install all terraform modules and set up the S3 backend (where terraform will store the state of your project)
-
 ### Run a Build
 Run `./scripts/build.sh` and with any luck your code will be built to the dist folder. You can have a look and see whet purescript will generate from the purs files.
+
+### Invoke the Function Locally
+Run `./scripts/sam-invoke.sh` to call your lambda function locally.
+
+### Initialise Terraform
+Run `./scripts/tf-init.sh` to install all terraform modules and set up the S3 backend (where terraform will store the state of your project)
 
 ### Run a Terraform Plan
 Run `./scripts/tf-plan.sh` to see what changes will be applied to your infrastructure. On the first run you should see alot of resources being created

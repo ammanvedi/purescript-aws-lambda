@@ -66,7 +66,7 @@ jsonLookupString k o = do
 
 run :: LambdaEvent -> Aff AWSAPIGatewayResponse
 run _ = do
-            response <- fetch "https://pokasddseapi.co/api/v2/pokemon/ditto"
+            response <- fetch "https://pokeapi.co/api/v2/pokemon/ditto"
                 {
                     method: GET,
                     headers: { "Content-Type": "application/json" }

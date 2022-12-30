@@ -1,0 +1,12 @@
+Globals:
+  Function:
+    Runtime: nodejs18.x
+    Timeout: 180
+    Handler: index.handler
+
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  PurescriptLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: "./dist/"
